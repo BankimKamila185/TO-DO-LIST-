@@ -1,0 +1,355 @@
+:root {
+    /* Light Theme (default) */
+    --primary-color: #5b21b6;
+    --primary-light: #7c3aed;
+    --secondary-color: #ec4899;
+    --background: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-color: #1f2937;
+    --text-muted: #6b7280;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --border-radius: 12px;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --gradient-start: #a78bfa;
+    --gradient-end: #ec4899;
+    --item-bg: #ffffff;
+    --item-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --item-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary-color: #8b5cf6;
+    --primary-light: #a78bfa;
+    --secondary-color: #f472b6;
+    --background: #111827;
+    --card-bg: #1f2937;
+    --text-color: #f9fafb;
+    --text-muted: #9ca3af;
+    --gradient-start: #4c1d95;
+    --gradient-end: #831843;
+    --item-bg: #374151;
+    --item-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    --item-hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: var(--background);
+    background-image: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: background 0.3s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.app-header {
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.app-header p {
+    opacity: 0.8;
+    font-size: 16px;
+}
+
+.todo-input {
+    background: var(--item-bg);
+    margin: 25px 20px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    overflow: hidden;
+}
+
+#task-input {
+    flex-grow: 1;
+    padding: 16px 20px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    background: var(--item-bg);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#date-input {
+    border: none;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    padding: 0 10px;
+    background: var(--item-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    min-width: 140px;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#date-input::-webkit-calendar-picker-indicator {
+    filter: var(--calendar-filter, none);
+    cursor: pointer;
+}
+
+[data-theme="dark"] #date-input::-webkit-calendar-picker-indicator {
+    --calendar-filter: invert(1);
+}
+
+#add-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#add-button:hover {
+    background: var(--primary-light);
+}
+
+#cancel-edit {
+    background: var(--text-muted);
+    color: white;
+    border: none;
+    padding: 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#cancel-edit:hover {
+    background: #4b5563;
+}
+
+.app-body {
+    padding: 0 20px 20px;
+}
+
+.todo-stats {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 10px 0 20px;
+}
+
+#todo-list {
+    list-style-type: none;
+}
+
+.todo-item {
+    display: flex;
+    align-items: flex-start;
+    background: var(--item-bg);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: var(--item-shadow);
+    transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+    box-shadow: var(--item-hover-shadow);
+    transform: translateY(-2px);
+}
+
+.todo-checkbox {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 12px;
+    margin-top: 2px;
+    transition: all 0.2s;
+}
+
+.todo-checkbox.completed {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.todo-checkbox.completed i {
+    display: block;
+    color: white;
+    font-size: 12px;
+}
+
+.todo-checkbox i {
+    display: none;
+}
+
+.todo-text {
+    flex-grow: 1;
+    font-size: 16px;
+    color: var(--text-color);
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.todo-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.todo-date {
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.todo-date i {
+    margin-right: 5px;
+}
+
+.todo-text.completed {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.todo-actions {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.todo-item:hover .todo-actions {
+    opacity: 1;
+}
+
+.todo-actions button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.todo-actions button:hover {
+    transform: scale(1.1);
+}
+
+.edit-btn {
+    background-color: var(--warning);
+}
+
+.complete-btn {
+    background-color: var(--success);
+}
+
+.delete-btn {
+    background-color: var(--danger);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 70px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.empty-state p {
+    font-size: 18px;
+}
+
+/* Animation for shake effect */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .fa-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .fa-sun {
+    display: block;
+}
+
+@media (max-width: 500px) {
+    .container {
+        height: 100vh;
+        border-radius: 0;
+        max-width: none;
+    }
+    
+    body {
+        padding: 0;
+    }
+}
